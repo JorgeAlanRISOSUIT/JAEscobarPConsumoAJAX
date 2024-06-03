@@ -1,4 +1,4 @@
-﻿namespace ApiAJAX.Result
+﻿namespace ML
 {
     public class Entidad
     {

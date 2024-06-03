@@ -13,5 +13,6 @@ namespace ML
         public string Telefono { get; set; }
         public string Email { get; set; }
         public string Empresa { get; set; }
+        public List<PersonaEvento> Eventos { get; set; }
     }
 }
