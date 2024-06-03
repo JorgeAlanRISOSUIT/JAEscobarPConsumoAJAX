@@ -12,6 +12,7 @@ namespace DL
     public partial class JAEscobarConsumoAJAXContext
     {
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder) {
+            
         }
 
         public List<DL.PersonaAseguradora> GetPersonaAseguradoras()
