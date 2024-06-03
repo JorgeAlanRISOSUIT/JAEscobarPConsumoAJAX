@@ -9,7 +9,8 @@ namespace ML
 {
     public class PersonaAseguradora
     {
-        public int Nombre { get; set; }
+        public int IdPersona { get; set; }
+        public string Nombre { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string EstadoCivil { get; set; }
