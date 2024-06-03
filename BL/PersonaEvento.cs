@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using System.Runtime.InteropServices;
 
 namespace BL
 {
@@ -10,12 +11,12 @@ namespace BL
             try
             {
                 ML.PersonaEvento model = new ML.PersonaEvento();
-                model.Eventos = new List<ML.PersonaEvento> { new ML.PersonaEvento() };
+                model.Eventos = new List<ML.PersonaEvento>();
                 using (DL.JAEscobarConsumoAJAXContext context = new DL.JAEscobarConsumoAJAXContext())
                 {
                     if (context.GetPersonaEventos().Count > 0)
                     {
-                        foreach (var data in context.GetPersonaEventos())
+                        foreach (DL.PersonaEvento data in context.GetPersonaEventos())
                         {
                             ML.PersonaEvento objEvento = new ML.PersonaEvento()
                             {
@@ -114,6 +115,28 @@ namespace BL
                     else
                     {
                         return (false, "No se encontro los datos de la persona", null);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message, ex);
+            }
+        }
+
+        public static (bool, string, Exception) Delete(int idPersona)
+        {
+            try
+            {
+                using (DL.JAEscobarConsumoAJAXContext context = new DL.JAEscobarConsumoAJAXContext())
+                {
+                    if(context.DeletePersonaEvento(idPersona) > 0)
+                    {
+                        return (true, "Se ha declinado el evento con exito", null);
+                    }
+                    else
+                    {
+                        return (false, "Este evento no fue registrado", null);
                     }
                 }
             }
