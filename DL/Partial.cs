@@ -13,9 +13,12 @@ namespace DL
     {
         public virtual DbSet<ML.StoredProcedure.SPAsegurado> SPResult { get; set; }
 
+        public virtual DbSet<ML.StoredProcedure.SPEvento> SPEvento { get; set; }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ML.StoredProcedure.SPAsegurado>().HasNoKey();
+            modelBuilder.Entity<ML.StoredProcedure.SPEvento>().HasNoKey();
         }
 
         public List<ML.StoredProcedure.SPAsegurado> GetPersonaAseguradoras()
@@ -25,7 +28,7 @@ namespace DL
 
         public ML.StoredProcedure.SPAsegurado GetPersonaAseguradora(int idPersona)
         {
-            return SPResult.FromSqlInterpolated($"MostrarPersonaAseguradoraById {idPersona}").SingleOrDefault();
+            return SPResult.FromSqlInterpolated($"MostrarPersonaAseguradoraById {idPersona}").AsEnumerable().SingleOrDefault();
         }
 
         public int AddPersonaAseguradora(ML.PersonaAseguradora aseguradora)
@@ -43,16 +46,16 @@ namespace DL
             return Database.ExecuteSqlInterpolated($"EliminarPersonaAseguradora {idPersona}");
         }
 
-        public List<DL.PersonaEvento> GetPersonaEventos()
+        public List<ML.StoredProcedure.SPEvento> GetPersonaEventos()
         {
-            return PersonaEventos.FromSqlRaw("MostrarPersonaEvento").ToList();
+            return SPEvento.FromSqlInterpolated($"MostrarPersonaEvento;").ToList();
         }
 
         public DL.PersonaEvento GetPersonaEvento(int idPersona)
         {
-            return PersonaEventos.FromSqlRaw($"MostrarPersonaAseguradoraById {idPersona}").SingleOrDefault();
+            return PersonaEventos.FromSqlInterpolated($"MostrarPersonaEventoById {idPersona}").AsEnumerable().SingleOrDefault();
         }
-
+        
         public int AddPersonaEvento(ML.PersonaEvento evento)
         {
             return Database.ExecuteSqlInterpolated($"AgregarPersonaEventos {evento.Nombre}, {evento.Telefono}, {evento.Email}, {evento.Empresa}");

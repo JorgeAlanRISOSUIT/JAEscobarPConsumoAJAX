@@ -3,21 +3,23 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 <div class="container-fluid px-3">
     <div class="row g-5">
         <div class="col-5">
             <div class="p-3 w-50 fw-bold">Se parte de nuestra comunidad</div>
         </div>
         <div class="col">
-            <div class="p-3">
+            <div class="p-4">
                 <h6 class="fw-bold">Captura los siguientes datos</h6>
-                <form class="row gx-1">
+                <form class="row gx-1" id="form-evento">
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
-                                <input name="Telefono" id="Telefono" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
-                                <label for="Telefono">Nombre*</label>
+                                <input name="Nombre" id="Nombre" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
+                                <label for="Nombre">Nombre*</label>
                             </div>
                         </div>
                     </div>
@@ -43,6 +45,11 @@
                                 <input name="Empresa" id="Empresa" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
                                 <label for="Empresa">Empresa*</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary">Guardar</button>
                         </div>
                     </div>
                 </form>

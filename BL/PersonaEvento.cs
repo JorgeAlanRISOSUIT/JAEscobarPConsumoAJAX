@@ -16,7 +16,7 @@ namespace BL
                 {
                     if (context.GetPersonaEventos().Count > 0)
                     {
-                        foreach (DL.PersonaEvento data in context.GetPersonaEventos())
+                        foreach (ML.StoredProcedure.SPEvento data in context.GetPersonaEventos())
                         {
                             ML.PersonaEvento objEvento = new ML.PersonaEvento()
                             {
@@ -48,16 +48,16 @@ namespace BL
             {
                 using (DL.JAEscobarConsumoAJAXContext context = new DL.JAEscobarConsumoAJAXContext())
                 {
-                    if (context.GetPersonaEvento(idPersona) != null)
+                    var init = context.GetPersonaEvento(idPersona);
+                    if (init != null)
                     {
-                        var init = context.GetPersonaEvento(idPersona);
                         ML.PersonaEvento model = new ML.PersonaEvento
                         {
                             IdPersona = init.IdPersona,
                             Nombre = init.Nombre,
+                            Telefono = init.Telefono,
                             Email = init.Email,
-                            Empresa = init.Empresa,
-                            Telefono = init.Telefono
+                            Empresa = init.Empresa
                         };
                         return (true, "", null, model);
                     }
