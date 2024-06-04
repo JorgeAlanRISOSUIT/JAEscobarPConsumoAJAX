@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PáginaAzul.Pages
 {
-    public class PersonaAseguradora
+    public class PersonaAseguradoraDTO
     {
         public int IdPersona { get; set; }
         [Required]

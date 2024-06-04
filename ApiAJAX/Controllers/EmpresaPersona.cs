@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace ApiAJAX.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/Consume")]
     [ApiController]
-    public class Empresa : ControllerBase
+    public class EmpresaPersona : ControllerBase
     {
 
         [HttpGet("Eventos")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetAll()
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -32,6 +35,7 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpGet("PorEvento/{idPersona}")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetById(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -52,10 +56,17 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPost("Nuevo")]
-        public ActionResult<DTO.ResultDTO> Add([FromBody] ML.PersonaEvento evento)
+        [Consumes(MediaTypeNames.Application.Json)]
+        public ActionResult<DTO.ResultDTO> Add(ML.DTO.PersonaEventoDTO evento)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaEvento.Add(evento);
+            var result = BL.PersonaEvento.Add(new ML.PersonaEvento { 
+                IdPersona = evento.IdPersona,
+                Nombre = evento.Nombre,
+                Email = evento.Email, 
+                Empresa = evento.Empresa,
+                Telefono = evento.Telefono
+            });
             if (result.Item1)
             {
                 resultDTO.Success = true;
@@ -71,7 +82,8 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPut("UltimoMomento")]
-        public ActionResult<DTO.ResultDTO> Update([FromBody] ML.PersonaEvento evento)
+        [Consumes(MediaTypeNames.Application.Json)]
+        public ActionResult<DTO.ResultDTO> Update(ML.PersonaEvento evento)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
             var result = BL.PersonaEvento.Update(evento);
@@ -89,11 +101,12 @@ namespace ApiAJAX.Controllers
             }
         }
 
-        [HttpDelete("EventoDeclinado/{:idPersona}")]
-        public ActionResult<DTO.ResultDTO> Delete(int idEvento)
+        [HttpDelete("EventoDeclinado/{idPersona}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        public ActionResult<DTO.ResultDTO> Delete(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaEvento.Delete(idEvento);
+            var result = BL.PersonaEvento.Delete(idPersona);
             if (result.Item1)
             {
                 resultDTO.Success = true;

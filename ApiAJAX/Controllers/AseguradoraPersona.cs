@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace ApiAJAX.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Persona : ControllerBase
+    public class AseguradoraPersona : ControllerBase
     {
 
         [HttpGet("Aseguradora")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetAll()
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -32,6 +35,7 @@ namespace ApiAJAX.Controllers
         }
         
         [HttpGet("ConsultaAsegurador")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetById(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -52,10 +56,26 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPost("NuevoRegistro")]
-        public ActionResult<DTO.ResultDTO> Add([FromBody] ML.PersonaAseguradora aseguradora)
+        [Consumes(MediaTypeNames.Application.Json)]
+        public ActionResult<DTO.ResultDTO> Add(ML.DTO.PersonaAseguradoraDTO aseguradora)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaAseguradora.Add(aseguradora);
+            var result = BL.PersonaAseguradora.Add(new ML.PersonaAseguradora
+            {
+                IdPersona = aseguradora.IdPersona,
+                Nombre = aseguradora.Nombre,
+                ApellidoPaterno = aseguradora.ApellidoPaterno,
+                ApellidoMaterno = aseguradora.ApellidoMaterno,
+                Entidad = aseguradora.Entidad,
+                Correo = aseguradora.Correo,
+                CURP = aseguradora.CURP,
+                EstadoCivil = aseguradora.EstadoCivil,
+                FechaNacimiento = aseguradora.FechaNacimiento,
+                Genero = aseguradora.Genero,
+                RFC = aseguradora.RFC,
+                Telefono = aseguradora.Telefono,
+                Aseguradoras = new List<ML.PersonaAseguradora>()
+            });
             if (result.Item1)
             {
                 resultDTO.Success = true;
@@ -71,10 +91,26 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPut("Cambios")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> Put([FromBody] ML.PersonaAseguradora aseguradora)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaAseguradora.Update(aseguradora);
+            var result = BL.PersonaAseguradora.Update(new ML.PersonaAseguradora
+            {
+                IdPersona = aseguradora.IdPersona,
+                Nombre = aseguradora.Nombre,
+                ApellidoPaterno = aseguradora.ApellidoPaterno,
+                ApellidoMaterno = aseguradora.ApellidoMaterno,
+                Entidad = aseguradora.Entidad,
+                Correo = aseguradora.Correo,
+                CURP = aseguradora.CURP,
+                EstadoCivil = aseguradora.EstadoCivil,
+                FechaNacimiento = aseguradora.FechaNacimiento,
+                Genero = aseguradora.Genero,
+                RFC = aseguradora.RFC,
+                Telefono = aseguradora.Telefono,
+                Aseguradoras = new List<ML.PersonaAseguradora>()
+            });
             if (result.Item1)
             {
                 resultDTO.Success = true;
@@ -90,6 +126,7 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpDelete("DeclinarAsegurador/{idPersona}")]
+        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> Delete(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();

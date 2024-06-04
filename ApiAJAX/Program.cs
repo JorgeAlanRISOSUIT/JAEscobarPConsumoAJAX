@@ -6,14 +6,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("paginas", policy =>
-    {
-        policy.WithOrigins("https://localhost:7161", "https://localhost:7299")
+    options.AddPolicy("PaginaAzul", policy => { 
+        policy.WithOrigins("*")
         .AllowAnyMethod()
         .AllowAnyHeader();
+    });
+    options.AddPolicy("PaginaCafe", policy=> { 
+        policy.WithOrigins("*")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
     });
 });
 
@@ -27,10 +30,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles();
+app.UseCors("PaginaAzul");
+app.UseCors("PaginaCafe");
 app.UseAuthorization();
-
-app.UseCors("paginas");
 app.MapControllers();
 
 app.Run();
