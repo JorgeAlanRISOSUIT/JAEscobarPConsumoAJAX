@@ -20,5 +20,6 @@ namespace ML
         public string RFC { get; set; }
         public string Telefono { get; set; }
         public string Correo { get; set; }
+        public List<PersonaAseguradora> aseguradoras { get; set; }
     }
 }
