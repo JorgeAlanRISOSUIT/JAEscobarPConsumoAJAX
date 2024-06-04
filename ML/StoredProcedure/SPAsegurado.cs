@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ML
+namespace ML.StoredProcedure
 {
-    public class PersonaAseguradora
+    public class SPAsegurado
     {
         public int IdPersona { get; set; }
         public string Nombre { get; set; }
@@ -15,7 +15,7 @@ namespace ML
         public string EstadoCivil { get; set; }
         public string Genero { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public Entidad Entidad { get; set; } = null!;
+        public string Estado { get; set; }
         public string CURP { get; set; }
         public string RFC { get; set; }
         public string Telefono { get; set; }
