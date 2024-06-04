@@ -17,30 +17,29 @@ namespace BL
                 model.Aseguradoras = new List<ML.PersonaAseguradora>();
                 using (DL.JAEscobarConsumoAJAXContext context = new DL.JAEscobarConsumoAJAXContext())
                 {
-                    if (context.GetPersonaAseguradoras().Count > 0)
+                    var listSP = context.GetPersonaAseguradoras();
+                    if (listSP.Count > 0)
                     {
-                        foreach (var data in context.GetPersonaAseguradoras())
+                        foreach (var item in listSP)
                         {
-                            ML.PersonaAseguradora aseguradora = new ML.PersonaAseguradora()
+                            ML.PersonaAseguradora objPersona = new ML.PersonaAseguradora()
                             {
-                                IdPersona = data.IdPersona,
-                                Nombre = data.Nombre,
-                                ApellidoPaterno = data.ApellidoPaterno,
-                                ApellidoMaterno = data.ApellidoMaterno,
-                                EstadoCivil = data.EstadoCivil,
-                                Genero = data.Genero,
-                                FechaNacimiento = data.FechaNacimiento,
-                                Entidad = new ML.Entidad()
+                                IdPersona = item.IdPersona,
+                                Nombre = item.Nombre,
+                                ApellidoPaterno = item.ApellidoPaterno,
+                                ApellidoMaterno = item.ApellidoMaterno,
+                                Correo = item.Correo,
+                                CURP = item.CURP,
+                                RFC = item.RFC,
+                                Entidad = new ML.Entidad
                                 {
-                                    IdEntidad = data.EntidadNacimientoNavigation.IdEstado,
-                                    Nombre = data.EntidadNacimientoNavigation.Nombre
+                                    Nombre = item.Estado
                                 },
-                                CURP = data.Curp,
-                                RFC = data.Rfc,
-                                Telefono = data.Telefono,
-                                Correo = data.Correo
+                                EstadoCivil = item.EstadoCivil,
+                                FechaNacimiento = item.FechaNacimiento,
+                                Genero = item.Genero,
+                                Telefono = item.Telefono,
                             };
-                            model.Aseguradoras.Add(aseguradora);
                         }
                         return (true, "", null, model);
                     }
@@ -63,23 +62,28 @@ namespace BL
                 ML.PersonaAseguradora model = new ML.PersonaAseguradora();
                 using (DL.JAEscobarConsumoAJAXContext context = new DL.JAEscobarConsumoAJAXContext())
                 {
-                    if (context.GetPersonaAseguradora(idPersona) != null)
+                    var item = context.GetPersonaAseguradora(idPersona);
+                    if (item != null)
                     {
-                        var init = context.GetPersonaAseguradora(idPersona);
-                        model.IdPersona = init.IdPersona;
-                        model.Nombre = init.Nombre;
-                        model.ApellidoPaterno = init.ApellidoPaterno;
-                        model.ApellidoMaterno = init.ApellidoMaterno;
-                        model.EstadoCivil = init.EstadoCivil;
-                        model.Genero = init.Genero;
-                        model.FechaNacimiento = init.FechaNacimiento;
-                        model.Entidad = new ML.Entidad();
-                        model.Entidad.Nombre = init.EntidadNacimientoNavigation.Nombre;
-                        model.CURP = init.Curp;
-                        model.RFC = init.Rfc;
-                        model.Telefono = init.Telefono;
-                        model.Correo = init.Correo;
-                        return (true, "", null, model);
+                        ML.PersonaAseguradora objPersona = new ML.PersonaAseguradora()
+                        {
+                            IdPersona = item.IdPersona,
+                            Nombre = item.Nombre,
+                            ApellidoPaterno = item.ApellidoPaterno,
+                            ApellidoMaterno = item.ApellidoMaterno,
+                            Correo = item.Correo,
+                            CURP = item.CURP,
+                            RFC = item.RFC,
+                            Entidad = new ML.Entidad
+                            {
+                                Nombre = item.Estado
+                            },
+                            EstadoCivil = item.EstadoCivil,
+                            FechaNacimiento = item.FechaNacimiento,
+                            Genero = item.Genero,
+                            Telefono = item.Telefono,
+                        };
+                        return (true, "", null, objPersona);
                     }
                     else
                     {

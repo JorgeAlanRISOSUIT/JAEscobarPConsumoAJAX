@@ -11,18 +11,21 @@ namespace DL
 {
     public partial class JAEscobarConsumoAJAXContext
     {
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder) {
-            
+        public virtual DbSet<ML.StoredProcedure.SPAsegurado> SPResult { get; set; }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ML.StoredProcedure.SPAsegurado>().HasNoKey();
         }
 
-        public List<DL.PersonaAseguradora> GetPersonaAseguradoras()
+        public List<ML.StoredProcedure.SPAsegurado> GetPersonaAseguradoras()
         {
-            return PersonaAseguradoras.FromSqlRaw("MostrarPersonaAseguradora").ToList();
+            return SPResult.FromSqlRaw("MostrarPersonaAseguradora").ToList();
         }
 
-        public PersonaAseguradora GetPersonaAseguradora(int idPersona)
+        public ML.StoredProcedure.SPAsegurado GetPersonaAseguradora(int idPersona)
         {
-            return PersonaAseguradoras.FromSqlInterpolated($"MostrarPersonaAseguradoraById {idPersona}").SingleOrDefault();
+            return SPResult.FromSqlInterpolated($"MostrarPersonaAseguradoraById {idPersona}").SingleOrDefault();
         }
 
         public int AddPersonaAseguradora(ML.PersonaAseguradora aseguradora)
