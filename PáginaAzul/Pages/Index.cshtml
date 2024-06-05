@@ -6,15 +6,23 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="container-fluid px-3">
-    <div class="row g-5">
+    <div class="d-flex justify-content-center">
         <div class="col-5">
-            <div class="p-3 w-50 fw-bold">Se parte de nuestra comunidad</div>
+            <div class="p-3 w-50 text-capitilize"><h2 class="fw-bold">Se parte de nuestra comunidad</h2></div>
+            <div class="p-3 w-50 text-capitalize">
+                <h3 class="fw-bold">marketing y comunicacion</h3>
+                <div class="text-justify fs-6">
+                    Para comunicación sobre alianzas, eventos,
+                    patrocinios y prensa por favor contacta a:
+                </div>
+            </div>
         </div>
         <div class="col">
             <div class="p-4">
-                <h6 class="fw-bold">Captura los siguientes datos</h6>
-                <form class="row gx-1" id="form-evento">
+                <h6 class="fw-bold text-muted">Captura los siguientes datos</h6>
+                <form class="row gx-1" id="form-evento" style="min-width: 526px; max-width: 526px">
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
@@ -49,7 +57,7 @@
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-primary">Guardar</button>
+                            <button class="w-75 btn btn-primary">Guardar</button>
                         </div>
                     </div>
                 </form>

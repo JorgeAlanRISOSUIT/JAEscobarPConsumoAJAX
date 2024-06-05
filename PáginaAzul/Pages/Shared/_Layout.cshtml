@@ -28,22 +28,48 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <section class="container-fluid overflow-scroll">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PáginaAzul - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </section>
+    <footer class="border-top overflow-scroll footer text-white">
+        <div class="container-fluid bg-info">
+            <div class="d-flex justify-content-evenly">
+                <div class="text-capitalize d-flex flex-column justify-content-evenly flex-wrap">
+                    <img src="" alt=""/>
+                    <b>Siguenos</b>
+                </div>
+                <div class="text-capitalize d-flex flex-column flex-wrap justify-content-evenly">
+                    <b>AHM</b>
+                    <div>
+                        Comunidad
+                    </div>
+                    <div>Sobre nosotros</div>
+                </div>
+                <div class="text-capitalize d-flex flex-column flex-wrap justify-content-evenly">
+                    <b>¿Para quién lo hacemos</b>
+                    <div>Nuestra mision</div>
+                    <div>Objetivos</div>
+                    <div>Vision</div>
+                    <div>Valores</div>
+                </div>
+                <div class="text-capitalize d-flex flex-column flex-wrap justify-content-evenly">
+                    <b>Iniciativas</b>
+                    <b>Miembros</b>
+                    <b>Registro</b>
+                    <b>Eventos</b>
+                    <b>Aviso de privacidad</b>
+                </div>
+            </div>
         </div>
+        <div class="border border-top-1 border-3 border-white"></div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

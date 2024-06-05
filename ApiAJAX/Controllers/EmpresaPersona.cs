@@ -11,7 +11,6 @@ namespace ApiAJAX.Controllers
     {
 
         [HttpGet("Eventos")]
-        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetAll()
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -35,7 +34,6 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpGet("PorEvento/{idPersona}")]
-        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> GetById(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
@@ -56,53 +54,75 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPost("Nuevo")]
-        [Consumes(MediaTypeNames.Application.Json)]
+        [Consumes(MediaTypeNames.Application.Json, IsOptional = true)]
         public ActionResult<DTO.ResultDTO> Add(ML.DTO.PersonaEventoDTO evento)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaEvento.Add(new ML.PersonaEvento { 
-                IdPersona = evento.IdPersona,
-                Nombre = evento.Nombre,
-                Email = evento.Email, 
-                Empresa = evento.Empresa,
-                Telefono = evento.Telefono
-            });
-            if (result.Item1)
+            if (evento.IdPersona == 0)
             {
-                resultDTO.Success = true;
-                resultDTO.Message = result.Item2;
-                return Ok(resultDTO);
+                var result = BL.PersonaEvento.Add(new ML.PersonaEvento
+                {
+                    IdPersona = evento.IdPersona,
+                    Nombre = evento.Nombre,
+                    Email = evento.Email,
+                    Empresa = evento.Empresa,
+                    Telefono = evento.Telefono
+                });
+                if (result.Item1)
+                {
+                    resultDTO.Success = true;
+                    resultDTO.Message = result.Item2;
+                    return Ok(resultDTO);
+                }
+                else
+                {
+                    resultDTO.Error = result.Item3;
+                    resultDTO.Message = result.Item2;
+                    return BadRequest(resultDTO);
+                }
             }
             else
             {
-                resultDTO.Error = result.Item3;
-                resultDTO.Message = result.Item2;
+                resultDTO.Message = "No se puede leer el usuario";
                 return BadRequest(resultDTO);
             }
         }
 
         [HttpPut("UltimoMomento")]
-        [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> Update(ML.PersonaEvento evento)
+        public ActionResult<DTO.ResultDTO> Update([FromBody]ML.DTO.PersonaEventoDTO evento)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
-            var result = BL.PersonaEvento.Update(evento);
-            if (result.Item1)
+            if (evento.IdPersona > 0)
             {
-                resultDTO.Success = true;
-                resultDTO.Message = result.Item2;
-                return Ok(resultDTO);
+                var result = BL.PersonaEvento.Update(new ML.PersonaEvento
+                {
+                    IdPersona = evento.IdPersona,
+                    Nombre = evento.Nombre,
+                    Email = evento.Email,
+                    Empresa = evento.Empresa,
+                    Telefono = evento.Telefono
+                });
+                if (result.Item1)
+                {
+                    resultDTO.Success = true;
+                    resultDTO.Message = result.Item2;
+                    return Ok(resultDTO);
+                }
+                else
+                {
+                    resultDTO.Error = result.Item3;
+                    resultDTO.Message = result.Item2;
+                    return BadRequest(resultDTO);
+                }
             }
             else
             {
-                resultDTO.Error = result.Item3;
-                resultDTO.Message = result.Item2;
-                return BadRequest(resultDTO);
+                resultDTO.Message = "Esta persona es inexistente";
+                return BadRequest();
             }
         }
 
         [HttpDelete("EventoDeclinado/{idPersona}")]
-        [Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<DTO.ResultDTO> Delete(int idPersona)
         {
             DTO.ResultDTO resultDTO = new DTO.ResultDTO();
