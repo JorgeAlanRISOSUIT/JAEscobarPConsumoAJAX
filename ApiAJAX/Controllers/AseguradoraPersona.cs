@@ -12,9 +12,9 @@ namespace ApiAJAX.Controllers
 
         [HttpGet("Aseguradora")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> GetAll()
+        public ActionResult<ML.DTO.ResultDTO> GetAll()
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaAseguradora.GetAll();
             if (result.Item1)
             {
@@ -36,9 +36,9 @@ namespace ApiAJAX.Controllers
         
         [HttpGet("ConsultaAsegurador")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> GetById(int idPersona)
+        public ActionResult<ML.DTO.ResultDTO> GetById(int idPersona)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaAseguradora.GetById(idPersona);
             if (result.Item1)
             {
@@ -57,9 +57,9 @@ namespace ApiAJAX.Controllers
 
         [HttpPost("NuevoRegistro")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> Add(ML.DTO.PersonaAseguradoraDTO aseguradora)
+        public ActionResult<ML.DTO.ResultDTO> Add(ML.DTO.PersonaAseguradoraDTO aseguradora)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaAseguradora.Add(new ML.PersonaAseguradora
             {
                 IdPersona = aseguradora.IdPersona,
@@ -92,9 +92,9 @@ namespace ApiAJAX.Controllers
 
         [HttpPut("Cambios")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> Put([FromBody] ML.PersonaAseguradora aseguradora)
+        public ActionResult<ML.DTO.ResultDTO> Put([FromBody] ML.PersonaAseguradora aseguradora)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaAseguradora.Update(new ML.PersonaAseguradora
             {
                 IdPersona = aseguradora.IdPersona,
@@ -127,9 +127,9 @@ namespace ApiAJAX.Controllers
 
         [HttpDelete("DeclinarAsegurador/{idPersona}")]
         [Consumes(MediaTypeNames.Application.Json)]
-        public ActionResult<DTO.ResultDTO> Delete(int idPersona)
+        public ActionResult<ML.DTO.ResultDTO> Delete(int idPersona)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaAseguradora.Delete(idPersona);
             if (result.Item1)
             {

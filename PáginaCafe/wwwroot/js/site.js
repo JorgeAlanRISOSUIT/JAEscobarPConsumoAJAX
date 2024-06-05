@@ -44,11 +44,19 @@ let dias = (mes, año) => {
     }
 }
 
-
+function proofUndefined(value) {
+    return value != undefined || mes != 0
+}
 
 $('#año').on('change', (event) => {
     $('#mes').prop('disabled', () => event.target.options[event.target.selectedIndex].value == 0)
     año = $('#mes').prop('disabled') ? 0 : event.target.options[event.target.selectedIndex].text
+    if (proofUndefined(mes)) {
+        $('#dia').empty().append($('<option>', { value: 0, text: "Día" }))
+        $.each(dias(mes, año), (index, value) => {
+            $('#dia').append($('<option>', { value: index + 1, text: value }))
+        })
+    }
 })
 
 $('#mes').on('change', (event) => {
@@ -74,11 +82,29 @@ $('#año').ready(() => {
     })
 })
 
+$('#Estados').ready(() => {
+    $.ajax({
+        url: "https://localhost:7294/api/Entidades/TodoEstado",
+        crossDomain: true,
+        contentType: 'application/json',
+        dataType: 'JSON',
+        type: 'GET',
+        success: function (result) {
+            if (result.success) {
+                $.each(result.objects, (index, value) => {
+                    $('#Estados').append($('<option>', { value: value.idEntidad, text: value.nombre }))
+                })
+            } else {
+                $('#Estados').prop('disabled', () => !result.success)
+            }
+        },
+        error: function (error) {
+            console.log(error)
+        }
+    })
+})
+
 
 $('#formulario-cafe').on('submit', (event) => {
     event.preventDefault()
 })
-
-function Estados() {
-
-}
