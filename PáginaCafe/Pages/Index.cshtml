@@ -1,75 +1,97 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
 
 <div class="p-5">
-    <div>
-    </div>
-    <div class="card">
-        <h3 class="card-header fw-bold fs-6">Ayudanos a llenar la información de la persona que paga el seguro</h3>
-        <div class="card-body">
-            <form class="row g-1 w-50">
-                <div class="col-sm-6">
-                    <div class="form-floating mb-3">
-                        <input id="Nombre" name="Nombre" type="text" class="form-control form-control-sm" placeholder="" />
-                        <label for="Nombre">Nombre(s)</label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-floating mb-3">
-                        <input id="ApellidoPaterno" name="ApellidoPaterno" type="text" class="form-control form-control-sm" placeholder="" />
-                        <label for="ApellidoPaterno">ApellidoPaterno</label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-floating mb-3">
-                        <input id="ApellidoMaterno" name="ApellidoMaterno" type="text" class="form-control form-control-sm" placeholder="" />
-                        <label for="ApellidoMaterno">ApellidoMaterno</label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="row gx-1">
-                        <div class="col-sm-6">
-                            <div class="col">
-                                <h6>Estado Civil</h6>
-                            </div>
-                            <select id="EstadoCivil" name="EstadoCivil" class="form-select form-select-sm" placeholder="">
-                                <option selected>Selecciona</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="col">
-                                <h6>Género</h6>
-                            </div>
-                            <select id="Genero" name="Genero" class="form-select form-select-sm" placeholder="">
-                                <option selected>Selecciona</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="row gx-1">
-                        <h6 class="col-sm-12">Fecha Nacimiento</h6>
-                        <div class="col-sm">
-                            <select class="form-select">
-                                <option selected>Día</option>
-                            </select>
-                        </div>
-                        <div class="col-sm">
-                            <select class="form-select">
-                                <option selected>Mes</option>
-                            </select>
-                        </div>
-                        <div class="col-sm">
-                            <select class="form-select">
-                                <option selected>Año</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div>
+	</div>
+	<div class="card">
+		<h3 class="card-header fw-bold fs-6">Ayudanos a llenar la información de la persona que paga el seguro</h3>
+		<div class="card-body">
+			<form class="row g-md-3 w-50">
+				<div class="col-sm-6">
+					<div class="form-floating mb-3">
+						<input id="Nombre" name="Nombre" type="text" class="form-control form-control-sm" placeholder="" />
+						<label for="Nombre">Nombre(s)</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-floating mb-3">
+						<input id="ApellidoPaterno" name="ApellidoPaterno" type="text" class="form-control form-control-sm" placeholder="" />
+						<label for="ApellidoPaterno">ApellidoPaterno</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-floating mb-3">
+						<input id="ApellidoMaterno" name="ApellidoMaterno" type="text" class="form-control form-control-sm" placeholder="" />
+						<label for="ApellidoMaterno">ApellidoMaterno</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row gx-1">
+						<div class="col-sm-6">
+							<div class="col">
+								<h6>Estado Civil</h6>
+							</div>
+							<select id="EstadoCivil" name="EstadoCivil" class="form-select form-select-sm" placeholder="">
+								<option selected>Selecciona</option>
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<div class="col">
+								<h6>Género</h6>
+							</div>
+							<select id="Genero" name="Genero" class="form-select form-select-sm" placeholder="">
+								<option selected>Selecciona</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row gx-1">
+						<h6 class="col-sm-12">Fecha Nacimiento</h6>
+						<div class="col-md">
+							<select class="form-select">
+								<option selected>Día</option>
+							</select>
+						</div>
+						<div class="col-md">
+							<select class="form-select">
+								<option selected>Mes</option>
+							</select>
+						</div>
+						<div class="col-md">
+							<select class="form-select">
+								<option selected>Año</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row gx-1">
+						<h6 class="col-sm-12">Entidad de nacimiento</h6>
+						<div class="col-sm">
+							<select class="form-select">
+								<option selected>Seleccione una opcion</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-floating mb-3">
+						<input id="CURP" name="CURP" type="text" class="form-control form-control-sm" placeholder="" />
+						<label for="CURP">CURP</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-floating mb-3">
+						<input id="RFC" name="RFC" type="text" class="form-control form-control-sm" placeholder="" />
+						<label for="RFC">RFC</label>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
