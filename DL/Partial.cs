@@ -23,7 +23,7 @@ namespace DL
 
         public List<ML.StoredProcedure.SPAsegurado> GetPersonaAseguradoras()
         {
-            return SPResult.FromSqlRaw("MostrarPersonaAseguradora").ToList();
+            return SPResult.FromSqlRaw("MostrarPersonaAseguradora;").ToList();
         }
 
         public ML.StoredProcedure.SPAsegurado GetPersonaAseguradora(int idPersona)
