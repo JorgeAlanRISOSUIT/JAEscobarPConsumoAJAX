@@ -16,3 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+input + label {
+    color: #0dcaf0;
+}
