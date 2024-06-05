@@ -3,12 +3,11 @@
 @{
 	ViewData["Title"] = "Home page";
 }
-
 <div class="p-5">
 	<div class="card">
 		<h3 class="card-header fw-bold fs-6">Ayudanos a llenar la información de la persona que paga el seguro</h3>
 		<div class="card-body px-5">
-			<form class="row g-md-3 w-50" id="formulario-cafe">
+			<form class="row g-md-3 w-50" asp-action="submitAsegurador" asp-controller="Index" id="formulario-cafe">
 				<div class="col-md-6">
 					<div class="form-floating mb-3">
 						<input id="Nombre" name="Nombre" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
@@ -35,6 +34,10 @@
 							</div>
 							<select id="EstadoCivil" name="EstadoCivil" class="form-select border-info text-info" placeholder="">
 								<option selected value="0">Selecciona</option>
+								<option selected value="1">Solter(@@)</option>
+								<option selected value="2">Casad(@@)</option>
+								<option selected value="3">Viudo(@@)</option>
+								<option selected value="4">Divorciad(@@)</option>
 							</select>
 						</div>
 						<div class="col-xxl-6">
@@ -73,7 +76,7 @@
 					<div class="row gx-1">
 						<h6 class="col-sm-12">Entidad de nacimiento</h6>
 						<div class="col-sm">
-							<select class="form-select border-info text-info">
+							<select class="form-select border-info text-info" id="Estados">
 								<option selected>Seleccione una opcion</option>
 							</select>
 						</div>

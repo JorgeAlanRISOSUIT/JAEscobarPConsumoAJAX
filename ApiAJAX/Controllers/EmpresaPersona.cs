@@ -11,9 +11,9 @@ namespace ApiAJAX.Controllers
     {
 
         [HttpGet("Eventos")]
-        public ActionResult<DTO.ResultDTO> GetAll()
+        public ActionResult<ML.DTO.ResultDTO> GetAll()
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaEvento.GetAll();
             if (result.Item1)
             {
@@ -34,9 +34,9 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpGet("PorEvento/{idPersona}")]
-        public ActionResult<DTO.ResultDTO> GetById(int idPersona)
+        public ActionResult<ML.DTO.ResultDTO> GetById(int idPersona)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaEvento.GetById(idPersona);
             if (result.Item1)
             {
@@ -55,9 +55,9 @@ namespace ApiAJAX.Controllers
 
         [HttpPost("Nuevo")]
         [Consumes(MediaTypeNames.Application.Json, IsOptional = true)]
-        public ActionResult<DTO.ResultDTO> Add(ML.DTO.PersonaEventoDTO evento)
+        public ActionResult<ML.DTO.ResultDTO> Add(ML.DTO.PersonaEventoDTO evento)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             if (evento.IdPersona == 0)
             {
                 var result = BL.PersonaEvento.Add(new ML.PersonaEvento
@@ -89,9 +89,9 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpPut("UltimoMomento")]
-        public ActionResult<DTO.ResultDTO> Update([FromBody]ML.DTO.PersonaEventoDTO evento)
+        public ActionResult<ML.DTO.ResultDTO> Update([FromBody]ML.DTO.PersonaEventoDTO evento)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             if (evento.IdPersona > 0)
             {
                 var result = BL.PersonaEvento.Update(new ML.PersonaEvento
@@ -123,9 +123,9 @@ namespace ApiAJAX.Controllers
         }
 
         [HttpDelete("EventoDeclinado/{idPersona}")]
-        public ActionResult<DTO.ResultDTO> Delete(int idPersona)
+        public ActionResult<ML.DTO.ResultDTO> Delete(int idPersona)
         {
-            DTO.ResultDTO resultDTO = new DTO.ResultDTO();
+            ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
             var result = BL.PersonaEvento.Delete(idPersona);
             if (result.Item1)
             {

@@ -21,6 +21,11 @@ namespace DL
             modelBuilder.Entity<ML.StoredProcedure.SPEvento>().HasNoKey();
         }
 
+        public List<DL.Estado> GetEstados()
+        {
+            return Estados.FromSqlRaw("MostrarEstados").ToList();
+        }
+
         public List<ML.StoredProcedure.SPAsegurado> GetPersonaAseguradoras()
         {
             return SPResult.FromSqlRaw("MostrarPersonaAseguradora;").ToList();
