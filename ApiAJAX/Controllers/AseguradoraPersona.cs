@@ -70,7 +70,11 @@ namespace ApiAJAX.Controllers
 				Nombre = aseguradora.Nombre,
 				ApellidoPaterno = aseguradora.ApellidoPaterno,
 				ApellidoMaterno = aseguradora.ApellidoMaterno,
-				Entidad = aseguradora.Entidad,
+				Entidad = new ML.Entidad
+				{
+					IdEntidad = aseguradora.Entidad.IdEntidad,
+					Nombre = aseguradora.Entidad.Nombre,
+				},
 				Correo = aseguradora.Correo,
 				CURP = aseguradora.CURP,
 				EstadoCivil = aseguradora.EstadoCivil,
@@ -109,7 +113,11 @@ namespace ApiAJAX.Controllers
 				Nombre = aseguradora.Nombre,
 				ApellidoPaterno = aseguradora.ApellidoPaterno,
 				ApellidoMaterno = aseguradora.ApellidoMaterno,
-				Entidad = aseguradora.Entidad,
+				Entidad = new ML.Entidad
+				{
+					IdEntidad = aseguradora.Entidad.IdEntidad,
+					Nombre = aseguradora.Entidad.Nombre,
+				},
 				Correo = aseguradora.Correo,
 				CURP = aseguradora.CURP,
 				EstadoCivil = aseguradora.EstadoCivil,

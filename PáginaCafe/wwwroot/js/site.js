@@ -70,7 +70,7 @@ $('#mes').on('change', (event) => {
 
 $('#mes').ready(() => {
     meses.forEach((value, index) => {
-        let optionText = $('<option>', { value: index + 1, text: value })
+        let optionText = $('<option>', { value: index , text: value })
         $('#mes').append(optionText)
     })
 })
@@ -82,7 +82,7 @@ $('#año').ready(() => {
     })
 })
 
-$('#Estados').ready(() => {
+$('#Entidad').ready(() => {
     $.ajax({
         url: "https://localhost:7294/api/Entidades/TodoEstado",
         crossDomain: true,
@@ -92,14 +92,60 @@ $('#Estados').ready(() => {
         success: function (result) {
             if (result.success) {
                 $.each(result.objects, (index, value) => {
-                    $('#Estados').append($('<option>', { value: value.idEntidad, text: value.nombre }))
+                    $('#Entidad').append($('<option>', { value: value.idEntidad, text: value.nombre }))
                 })
             } else {
-                $('#Estados').prop('disabled', () => !result.success)
+                $('#Entidad').prop('disabled', () => !result.success)
             }
         },
         error: function (error) {
             console.log(error)
+        }
+    })
+})
+
+$('#IndexForm').on("submit", (event) => {
+    event.preventDefault()
+    let info = {
+        nombre: $('#Nombre').val(),
+        apellidoPaterno: $('#ApellidoPaterno').val(),
+        apellidoMaterno: $('#ApellidoMaterno').val(),
+        estadoCivil: $('#EstadoCivil option:selected').val(),
+        genero: $('#Genero option:selected').prop('value'),
+        fechaNacimiento: () => {
+            let date = new Date(parseInt($('#año option:selected').prop('text')), parseInt($('#mes option:selected').prop('value')), parseInt($('#dia option:selected').prop('value')))
+            if (date instanceof Date && !isNaN(date))
+                return date.toISOString()
+            else {
+                return new Date().toISOString()
+            }
+        },
+        entidad: {
+            idEntidad: parseInt($('#Entidad option:selected').prop('value')),
+            nombre: $('#Entidad option:selected').prop('text')
+        },
+        curp: $('#CURP').val(),
+        rfc: $('#RFC').val(),
+        telefono: $('#Telefono').val(),
+        correo: $('#Email').val(),
+    }
+    console.log(JSON.stringify(info))
+    $.ajax({
+        url: 'https://localhost:7294/api/AseguradoraPersona/NuevoRegistro',
+        type: 'POST',
+        crossDomain: true,
+        contentType: 'application/json',
+        dataType: 'JSON',
+        data: JSON.stringify(info),
+        success: function (result) {
+            $('#modalBody').empty().append($('<div>').addClass('alert alert-success col-md-12').text('Se ha insertado el usuario correctamente'))
+        },
+        error: function (error) {
+            $('#modalBody').empty()
+            $('#modalBody').append($('<div>').addClass('d-flex col-md-12 flex-column').prop('id', 'info-message'))
+            for (let [name, value] of Object.entries(error.responseJSON.errors)) {
+                $('#info-message').text(name + ":" + value)
+            }
         }
     })
 })
