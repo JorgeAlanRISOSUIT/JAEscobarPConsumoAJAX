@@ -10,7 +10,7 @@ namespace ApiAJAX.Controllers
     public class EmpresaPersona : ControllerBase
     {
 
-        [HttpGet("Eventos")]
+        [HttpGet("Eventos"), Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ML.DTO.ResultDTO> GetAll()
         {
             ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
@@ -33,7 +33,7 @@ namespace ApiAJAX.Controllers
             }
         }
 
-        [HttpGet("PorEvento/{idPersona}")]
+        [HttpGet("PorEvento/{idPersona}"), Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ML.DTO.ResultDTO> GetById(int idPersona)
         {
             ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
@@ -53,8 +53,7 @@ namespace ApiAJAX.Controllers
             }
         }
 
-        [HttpPost("Nuevo")]
-        [Consumes(MediaTypeNames.Application.Json, IsOptional = true)]
+        [HttpPost("Nuevo"), Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ML.DTO.ResultDTO> Add(ML.DTO.PersonaEventoDTO evento)
         {
             ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
@@ -88,7 +87,7 @@ namespace ApiAJAX.Controllers
             }
         }
 
-        [HttpPut("UltimoMomento")]
+        [HttpPut("UltimoMomento"), Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ML.DTO.ResultDTO> Update([FromBody]ML.DTO.PersonaEventoDTO evento)
         {
             ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();
@@ -122,7 +121,7 @@ namespace ApiAJAX.Controllers
             }
         }
 
-        [HttpDelete("EventoDeclinado/{idPersona}")]
+        [HttpDelete("EventoDeclinado/{idPersona}"), Consumes(MediaTypeNames.Application.Json)]
         public ActionResult<ML.DTO.ResultDTO> Delete(int idPersona)
         {
             ML.DTO.ResultDTO resultDTO = new ML.DTO.ResultDTO();

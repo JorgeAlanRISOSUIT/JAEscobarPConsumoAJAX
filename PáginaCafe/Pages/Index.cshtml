@@ -1,115 +1,124 @@
 ﻿@page
 @model IndexModel
 @{
-	ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home page";
 }
 <div class="p-5">
-	<div class="card">
-		<h3 class="card-header fw-bold fs-6">Ayudanos a llenar la información de la persona que paga el seguro</h3>
-		<div class="card-body px-5">
-			<form class="row g-md-3 w-50" asp-action="submitAsegurador" asp-controller="Index" id="formulario-cafe">
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="Nombre" name="Nombre" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label class="text-primary-emphasis" for="Nombre">Nombre(s)</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="ApellidoPaterno" name="ApellidoPaterno" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label class="text-primary-emphasis" for="ApellidoPaterno">ApellidoPaterno</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="ApellidoMaterno" name="ApellidoMaterno" type="text" class="form-control form-control-sm border-info" placeholder="" />
-						<label for="ApellidoMaterno">ApellidoMaterno</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="row gx-1">
-						<div class="col-xxl-6">
-							<div class="col">
-								<h6>Estado Civil</h6>
-							</div>
-							<select id="EstadoCivil" name="EstadoCivil" class="form-select border-info text-info" placeholder="">
-								<option selected value="0">Selecciona</option>
-								<option selected value="1">Solter(@@)</option>
-								<option selected value="2">Casad(@@)</option>
-								<option selected value="3">Viudo(@@)</option>
-								<option selected value="4">Divorciad(@@)</option>
-							</select>
-						</div>
-						<div class="col-xxl-6">
-							<div class="col">
-								<h6>Género</h6>
-							</div>
-							<select id="Genero" name="Genero" class="form-select border-info text-info" placeholder="">
-								<option selected value="0">Selecciona</option>
-								<option value="M">Hombre</option>
-								<option value="F">Mujer</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 my-sm-2">
-					<div class="row gx-1 gap-2">
-						<h6 class="col-sm-12">Fecha Nacimiento</h6>
-						<div class="col-lg">
-							<select class="form-select border-info text-info" id="dia" disabled>
-								<option selected value="0">Día</option>
-							</select>
-						</div>
-						<div class="col-lg">
-							<select class="form-select border-info text-info text-capitalize" id="mes" disabled>
-								<option selected value="0">Mes</option>
-							</select>
-						</div>
-						<div class="col-lg">
-							<select class="form-select border-info text-info" id="año">
-								<option selected value="0">Año</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 my-sm-2">
-					<div class="row gx-1">
-						<h6 class="col-sm-12">Entidad de nacimiento</h6>
-						<div class="col-sm">
-							<select class="form-select border-info text-info" id="Estados">
-								<option selected>Seleccione una opcion</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="CURP" name="CURP" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label for="CURP">CURP</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="RFC" name="RFC" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label for="RFC">RFC</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="Telefono" name="Telefono" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label for="Telefono">Telefono</label>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-floating mb-3">
-						<input id="Email" name="Email" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
-						<label class="fs-6 text-nowrap" for="Email">Correo Electrónico</label>
-					</div>
-				</div>
-				<div class="col-md-12 d-flex flex-row-reverse">
-					<button type="submit" class="btn btn-secondary w-50 text-nowrap">Continuar</button>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="card">
+        <h3 class="card-header fw-bold fs-6">Ayudanos a llenar la información de la persona que paga el seguro</h3>
+        <div class="card-body px-5">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @using (Html.BeginForm("", "IndexModel", FormMethod.Post, new { @class = "row g-md-3 w-50" }))
+            {
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="Nombre" asp-for="Asegurado.Nombre" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label class="text-primary-emphasis" asp-for="Asegurado.Nombre">Nombre(s)</label>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Asegurado.Nombre"></span>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="ApellidoPaterno" asp-for="Asegurado.ApellidoPaterno" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label class="text-primary-emphasis" asp-for="Asegurado.ApellidoPaterno">ApellidoPaterno</label>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Asegurado.ApellidoPaterno"></span>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="ApellidoMaterno" asp-for="Asegurado.ApellidoMaterno" type="text" class="form-control form-control-sm border-info" placeholder="" />
+                        <label asp-for="Asegurado.ApellidoMaterno">ApellidoMaterno</label>
+                    </div>
+                    <span class="text-danger" asp-validation-for="Asegurado.ApellidoMaterno"></span>
+                </div>
+                <div class="col-md-6">
+                    <div class="row gx-1">
+                        <div class="col-xxl-6">
+                            <div class="col">
+                                <label asp-for="Asegurado.EstadoCivil"><h6>Estado Civil</h6></label>
+                            </div>
+                            <select id="EstadoCivil" asp-for="Asegurado.EstadoCivil" class="form-select border-info text-info" placeholder="">
+                                <option selected value="">Selecciona</option>
+                                <option value="Soltero">Solter(@@)</option>
+                                <option value="Casado">Casad(@@)</option>
+                                <option value="Viudo">Viudo(@@)</option>
+                                <option value="Divorciado">Divorciad(@@)</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="Asegurado.EstadoCivil"></span>
+                        </div>
+                        <div class="col-xxl-6">
+                            <div class="col">
+                                <label asp-for="Asegurado.Genero"><h6>Género</h6></label>
+                            </div>
+                            @Html.DropDownListFor(model => model.Asegurado.Genero, new List<SelectListItem> { new SelectListItem { Text = "Hombre", Value = "M" }, new SelectListItem { Text = "Mujer", Value = "F" } }, "Seleccione", htmlAttributes: new { @class = "form-select border-info text-info" })
+                            @Html.ValidationMessageFor(model => model.Asegurado.Genero, "", new { @class= "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 my-sm-2">
+                    <div class="row gx-1 gap-2">
+                        <label asp-for="Asegurado.FechaNacimiento"><h6 class="col-sm-12">Fecha Nacimiento</h6></label>
+                        <div class="col-lg">
+                            <select class="form-select border-info text-info" asp-for="dia" id="dia" disabled>
+                                <option selected value="0">Día</option>
+                            </select>
+                            <label class="visually-hidden" asp-for="dia"></label>
+                            <span asp-validation-for="dia"></span>
+                        </div>
+                        <div class="col-lg">
+                            <select class="form-select border-info text-info text-capitalize" asp-for="mes" id="mes" disabled>
+                                <option selected value="0">Mes</option>
+                            </select>
+                            <label class="visually-hidden" asp-for="mes"></label>
+                            <span asp-validation-for="mes"></span>
+                        </div>
+                        <div class="col-lg">
+                            <select class="form-select border-info text-info" asp-for="year" id="año">
+                                <option selected value="0">Año</option>
+                            </select>
+                            <label class="visually-hidden" asp-for="year"></label>
+                            <span asp-validation-for="year"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 my-sm-2">
+                    <div class="row gx-1">
+                        <h6 class="col-sm-12">Entidad de nacimiento</h6>
+                        <div class="col-sm">
+                            <select class="form-select border-info text-info" name="Entidad" id="Estados">
+                                <option selected>Seleccione una opcion</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="CURP" asp-for="Asegurado.CURP" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label asp-for="Asegurado.CURP">CURP</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="RFC" asp-for="Asegurado.RFC" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label asp-for="Asegurado.RFC">RFC</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="Telefono" asp-for="Asegurado.Telefono" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label asp-for="Asegurado.Telefono">Telefono</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input id="Email" asp-for="Asegurado.Correo" type="text" class="fs-6 form-control form-control-sm border-info" placeholder="" />
+                        <label class="fs-6 text-nowrap" asp-for="Asegurado.Correo">Correo Electrónico</label>
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex flex-row-reverse">
+                    <button type="submit" class="btn btn-secondary w-50 text-nowrap">Continuar</button>
+                </div>
+            }
+        </div>
+    </div>
 </div>

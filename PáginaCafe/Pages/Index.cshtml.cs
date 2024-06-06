@@ -8,8 +8,17 @@ namespace PáginaCafe.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        [BindProperty(SupportsGet = true)]
-        public ML.DTO.PersonaAseguradoraDTO data { get; set; }
+        [BindProperty]
+        public ML.DTO.PersonaAseguradoraDTO Asegurado { get; set; }
+
+        [BindProperty]
+        public int dia { get; set; }
+
+        [BindProperty]
+        public int mes { get; set; }
+
+        [BindProperty]
+        public int year { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {

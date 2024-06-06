@@ -103,8 +103,3 @@ $('#Estados').ready(() => {
         }
     })
 })
-
-
-$('#formulario-cafe').on('submit', (event) => {
-    event.preventDefault()
-})
