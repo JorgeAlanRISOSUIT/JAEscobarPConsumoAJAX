@@ -9,7 +9,6 @@ namespace ML.DTO
 {
 	public class PersonaAseguradoraDTO
 	{
-		[Key]
 		public int IdPersona { get; set; }
 		[Required]
 		[StringLength(50, MinimumLength = 5)]
@@ -25,8 +24,7 @@ namespace ML.DTO
 		public string ApellidoMaterno { get; set; }
 		[Required]
 		public string EstadoCivil { get; set; }
-		[Required]
-		[StringLength(1)]
+		[Required, MaxLength(1)]
 		public string Genero { get; set; }
 		[Required]
 		[DisplayFormat(DataFormatString = "YYYY/MM/DD")]
