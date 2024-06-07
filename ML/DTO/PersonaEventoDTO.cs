@@ -11,13 +11,14 @@ namespace ML.DTO
     {
         [Key]
         public int IdPersona { get; set; }
+
         [Required, MinLength(5), MaxLength(50)]
         public string Nombre { get; set; }
 
-        [Required, RegularExpression(@"[55]\-[0-9]{8}")]
+        [Required, RegularExpression(@"55-[0-9]{8}"), MinLength(11)]
         public string Telefono { get; set; }
 
-        [Required, EmailAddress, RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"), MaxLength(254)]
+        [Required, EmailAddress, RegularExpression(@".+\@(gmail|hotmail|outlook).com"), MaxLength(254)]
         public string Email { get; set; }
 
         [Required, MaxLength(30)]
