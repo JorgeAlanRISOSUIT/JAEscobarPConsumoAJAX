@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
 <div class="container-fluid px-3">
     <div class="d-flex justify-content-center">
         <div class="col-5">
@@ -26,38 +27,57 @@
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
-                                <input name="Nombre" id="Nombre" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
-                                <label for="Nombre">Nombre*</label>
+                                <input asp-for="personaEvento.Nombre" id="Nombre" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
+                                <label asp-for="personaEvento.Nombre"> Nombre*</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
-                                <input name="Telefono" id="Telefono" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
-                                <label for="Telefono">Telefono*</label>
+                                <input asp-for="personaEvento.Telefono" id="Telefono" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
+                                <label asp-for="personaEvento.Telefono">Telefono*</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
-                                <input name="Email" id="Email" type="email" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
-                                <label for="Email">Email*</label>
+                                <input asp-for="personaEvento.Email" id="Email" type="email" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
+                                <label asp-for="personaEvento.Email">Email*</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="p-4">
                             <div class="form-floating">
-                                <input name="Empresa" id="Empresa" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
-                                <label for="Empresa">Empresa*</label>
+                                <input asp-for="personaEvento.Empresa" id="Empresa" type="text" class="form-control form-control-sm border-0 border-bottom" placeholder="" />
+                                <label asp-for="personaEvento.Empresa">Empresa*</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="w-75 btn btn-primary">Guardar</button>
+                            <button class="w-75 btn btn-primary" data-bs-toggle="modal" data-bs-target="#Message">Guardar</button>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="Message">
+                        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                            <div class="modal-content col-md-12">
+                                <div class="modal-header" id="modal-header">
+                                    <div class="container-fluid text-center">
+                                        <div class="alert alert-success col-12" id="alert"></div>
+                                    </div>
+                                </div>
+                                <div class="modal-body" id="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="d-flex justify-content-center align-items-center text-danger" id="modal-body">
+                                            <div asp-validation-summary="All"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" id="modal-footer"></div>
+                            </div>
                         </div>
                     </div>
                 </form>
