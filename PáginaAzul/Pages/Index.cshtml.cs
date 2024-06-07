@@ -7,6 +7,9 @@ namespace PáginaAzul.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        [BindProperty]
+        public ML.DTO.PersonaEventoDTO personaEvento { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
