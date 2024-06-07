@@ -40,6 +40,7 @@ namespace BL
                                 Genero = item.Genero,
                                 Telefono = item.Telefono,
                             };
+                            model.Aseguradoras.Add(objPersona);
                         }
                         return (true, "", null, model);
                     }
